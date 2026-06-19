@@ -208,3 +208,50 @@ Status: Inactive
 Instructor: Not assigned yet
 ```
 
+---
+
+## Day 1 Exercise 04 - Add a CourseOffering Class
+
+### Why is CourseOffering more useful than using only Course in a real web app?
+
+A `Course` is just the **template** — the general definition (title, level,
+duration). But the same course gets taught many times: different intakes,
+dates, instructors, capacities, and delivery modes. If you tried to store all
+that on `Course` itself, you'd have to either duplicate the whole course for
+every run, or constantly overwrite its dates/instructor — losing history.
+
+`CourseOffering` separates "what the course is" from "one specific scheduled
+run of it". This gives a clean **one-to-many** relationship: one `Course` has
+many `CourseOffering`s. In the real app this maps directly to two database
+collections/tables — you store the course once and reference it from each
+offering, instead of repeating it. It also makes things like "show all June
+2026 intakes" or "this offering is full" easy to model.
+
+### How AI helped
+
+AI clarified the modelling idea (template vs. scheduled run) and pointed out
+that `CourseOffering` *references* `Course` and `Instructor` objects rather
+than copying their data — the same has-a relationship as `Course → Instructor`.
+
+### Output
+
+```text
+Offering ID: OFF001
+Offering Name: Java Fundamentals - June 2026 Intake
+Course: Java Fundamentals
+Instructor: Aina Rahman
+Start Date: 2026-06-19
+End Date: 2026-06-20
+Capacity: 25
+Delivery Mode: Physical
+
+Offering ID: OFF002
+Offering Name: React Essentials - July 2026 Intake
+Course: React Essentials
+Instructor: Budi Santoso
+Start Date: 2026-07-01
+End Date: 2026-07-15
+Capacity: 30
+Delivery Mode: Online
+```
+
