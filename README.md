@@ -170,3 +170,41 @@ C++, but I never call `delete`. That cleared up why there are no pointers,
 **One part I still needed the trainer / my own reading for:**
 _how packages map to folders?_
 
+---
+
+## Day 1 Exercise 02 - Improve the Course Class
+
+### What changed in `Course.java`
+
+1. **Added two fields:** `private String category;` and `private boolean active;`.
+2. **Updated the constructor** to take `category` and `active` as extra
+   parameters and assign them with `this.category = category;` /
+   `this.active = active;`. (This changes the constructor signature, so every
+   `new Course(...)` must now pass 6 arguments.)
+3. **Updated `printSummary()`** to print two new lines: `Category: ...` and
+   `Status: ...`.
+4. **Challenge:** instead of printing the raw boolean, the status is converted
+   to friendly text with a ternary: `active ? "Active" : "Inactive"`.
+5. Added `getCategory()` and `isActive()` getters (Java convention: boolean
+   getters are named `isX()`, not `getX()`).
+
+### Output
+
+```text
+Course ID: C101
+Title: Intro to Java
+Duration: 40 hours
+Level: Beginner
+Category: Programming
+Status: Active
+Instructor: Aisha
+
+Course ID: C202
+Title: Legacy COBOL
+Duration: 20 hours
+Level: Advanced
+Category: Project
+Status: Inactive
+Instructor: Not assigned yet
+```
+
