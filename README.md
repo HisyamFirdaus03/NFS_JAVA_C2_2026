@@ -110,3 +110,63 @@ Participants may use AI tools to:
 
 Participants must always review, verify, test, and understand any AI-generated output. No passwords, API keys, tokens, private keys, or confidential data should be placed into AI prompts.
 
+---
+
+## Day 1 Exercise 01 - Code Explanation
+
+> Explained from a C++ background. Note: the current project only contains
+> `Course.java` and `Instructor.java`. `Student.java` and `Main.java` don't
+> exist yet, the assign method is actually `setInstructor(...)`, and
+> `printProfile()` belongs to `Instructor`, not `Student`. Answers below
+> reflect the real code.
+
+**1. What is the purpose of Course.java?**
+It's a blueprint (like a C++ `class`) describing a course. It holds the
+course's data — `courseId`, `title`, `durationHours`, `level` — plus a
+reference to the `Instructor` teaching it. It also knows how to print itself
+via `printSummary()`.
+
+**2. What is the purpose of Instructor.java?**
+A blueprint for an instructor: holds `instructorId`, `instructorName`, and
+`expertise`, and can print itself via `printProfile()`. A `Course` *has an*
+`Instructor` — this is the object relationship (composition/association).
+
+**3. What is the purpose of Student.java?**
+Not present in the project yet. By analogy it would be a blueprint for a
+student (id, name, etc.) with its own `printProfile()` method.
+
+**4. What does the constructor do?**
+`public Course(String courseId, ...)` runs when you create an object with
+`new`. It initialises the fields from the arguments — same job as a C++
+constructor. `this.title = title;` is just C++'s `this->title = title;`
+(used here to tell the field apart from the same-named parameter).
+
+**5. Why are the fields marked as private?**
+Encapsulation — same reason as C++ `private:`. Outside code can't poke the
+fields directly; it must go through getters/setters (`getTitle()`,
+`setInstructor()`). This lets the class control and validate its own state.
+
+**6. What does course1.setInstructor(instructor1) mean?**
+(The sheet calls it `assignInstructor`; in the code it's `setInstructor`.)
+It stores the `instructor1` reference inside `course1`'s `instructor` field —
+linking the two objects so the course now "has" that instructor. In C++ terms
+it's like assigning a pointer: `course1.instructor = &instructor1;`. Before
+this is called the field is `null` (C++ `nullptr`), which is why
+`printSummary()` checks `if (instructor == null)`.
+
+**7. What does printProfile() do?**
+On `Instructor`, it prints the instructor's id, name, and expertise to the
+console via `System.out.println` (Java's `std::cout`). It's a member method
+that reads the object's own fields and displays them.
+
+### AI-Assisted Task
+
+**One explanation from AI that helped me:**
+That Java objects are always heap references managed by a garbage collector,
+`Course c = new Course(...)` is closer to `Course* c = new Course(...)` in
+C++, but I never call `delete`. That cleared up why there are no pointers,
+`*`, `&`, or destructors.
+
+**One part I still needed the trainer / my own reading for:**
+_how packages map to folders?_
+
