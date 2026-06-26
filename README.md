@@ -199,3 +199,29 @@ their text, so the course is defined once and shared. This maps directly to how
 the data will later be modelled in MongoDB: a courses collection and an
 offerings collection that reference it.
 
+---
+
+## Day 3 Exercise 05 - Loop Search vs Stream Search
+
+### Which version is easier to understand: loop or stream? Why?
+
+The **loop** version is easier to understand the first time, because every step
+is written out explicitly: make an empty list, walk through each course one by
+one, check a condition, add the matches, return the list. You can read it
+top-to-bottom like instructions and trace exactly what happens.
+
+The **stream** version (`findAll().stream().filter(...).toList()`) is shorter
+and reads more like a sentence ("take all courses, keep the ones that match,
+collect them"), but it hides the loop and the temporary list. Once you're
+comfortable, it's quicker to write and harder to get wrong — but the loop is
+the better mental model for a beginner because nothing is hidden. Both produce
+the **exact same result** (proven in the demo output).
+
+### What does `filter()` do in a stream?
+
+`filter()` takes a condition (a boolean test) and **keeps only the elements
+that pass it**, dropping the rest. It's the stream equivalent of the
+`if (...) results.add(course);` line inside the loop — the elements that make
+the condition `true` continue down the stream, and the ones that make it
+`false` are removed.
+

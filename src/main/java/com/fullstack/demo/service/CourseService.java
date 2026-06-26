@@ -80,6 +80,44 @@ public class CourseService {
                 .toList();
     }
 
+    // Task B: loop version - easy to read step by step.
+    public List<Course> searchByLevelUsingLoop(String level) {
+        String safeLevel = level == null ? "" : level.trim();
+
+        List<Course> results = new ArrayList<>();
+
+        for (Course course : courseRepository.findAll()) {
+            if (course.getLevel().equalsIgnoreCase(safeLevel)) {
+                results.add(course);
+            }
+        }
+
+        return results;
+    }
+
+    // Optional Task D: same logic written as a stream.
+    public List<Course> searchByLevelUsingStream(String level) {
+        String safeLevel = level == null ? "" : level.trim();
+
+        return courseRepository.findAll()
+                .stream()
+                .filter(course -> course.getLevel().equalsIgnoreCase(safeLevel))
+                .toList();
+    }
+
+    // Optional Task E: return courses that are at least minimumHours long.
+    public List<Course> searchByMinimumDurationUsingLoop(int minimumHours) {
+        List<Course> results = new ArrayList<>();
+
+        for (Course course : courseRepository.findAll()) {
+            if (course.getDurationHours() >= minimumHours) {
+                results.add(course);
+            }
+        }
+
+        return results;
+    }
+
     public List<Course> searchByInstructorName(String instructorName) {
         String safeInstructorName = instructorName == null ? "" : instructorName.toLowerCase();
 
