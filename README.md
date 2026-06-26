@@ -152,3 +152,25 @@ that's the whole point of splitting the interface from the implementation.
 (With Spring Boot, a `MongoRepository` interface usually generates this for
 us.)
 
+---
+
+## Day 3 Exercise 03 - Exception Practice with CourseService
+
+### Why is throwing `CourseNotFoundException` better than printing inside `CourseService`?
+
+If the service printed `"Course not found"` itself, it would be **stuck with
+one fixed reaction** for everyone. But the same missing-course situation needs
+to be shown differently depending on who's calling:
+
+- a **console app** prints a friendly line to the terminal,
+- a **web API** returns an HTTP 404 with a JSON error body,
+- a **frontend app** shows a red toast or an "empty state" screen.
+
+By **throwing** the exception, the service only says *"this went wrong and
+why"* — it doesn't decide how to display it. The **caller** catches it and
+reacts in whatever way suits its context. This keeps the business logic
+reusable across console, API, and UI without change, and it stops the service
+from silently swallowing errors (a print can be missed; an uncaught exception
+cannot). It's the same separation as the repository interface: the service
+reports the problem, the caller owns the response.
+
