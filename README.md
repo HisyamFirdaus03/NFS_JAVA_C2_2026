@@ -131,3 +131,24 @@ Participants must always review, verify, test, and understand any AI-generated o
 So the direction is **demo → service → repository → map**, and the found
 object returns back up the same path.
 
+---
+
+## Day 3 Exercise 02 - Interface and Repository Storage Practice
+
+### Why is `InMemoryCourseRepository` temporary storage? What would replace it with MongoDB?
+
+It stores courses in a `LinkedHashMap` that lives in **RAM**, inside the
+running program. The moment the program stops, that map is gone — nothing is
+written to disk, so every run starts empty. That's fine for practising and
+testing, but useless for a real app where data must survive restarts and be
+shared between users.
+
+Later, MongoDB replaces it: we'd write a new class (e.g.
+`MongoCourseRepository`) that **implements the same `CourseRepository`
+interface** but stores courses in a MongoDB collection instead of a map.
+Because the service only depends on the `CourseRepository` interface, we swap
+the implementation **without changing the service or any business logic** —
+that's the whole point of splitting the interface from the implementation.
+(With Spring Boot, a `MongoRepository` interface usually generates this for
+us.)
+
