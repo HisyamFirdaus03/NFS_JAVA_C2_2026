@@ -174,3 +174,28 @@ from silently swallowing errors (a print can be missed; an uncaught exception
 cannot). It's the same separation as the repository interface: the service
 reports the problem, the caller owns the response.
 
+---
+
+## Day 3 Exercise 04 - Object Relationships and Composition
+
+### Why is `CourseOffering` a better design than putting start date, end date, and capacity directly inside `Course`?
+
+A `Course` is the **template** (title, level, duration) — it doesn't change
+per run. But a course is taught **many times**: different dates, capacities,
+instructors, and delivery modes each intake.
+
+If start date, end date, and capacity lived *inside* `Course`, then one course
+could only ever hold **one** schedule. To offer "Java Fundamentals" in June
+and again in July you'd have to **duplicate the whole course**, copying the
+title/level/duration each time — and if you fixed a typo in the title you'd
+have to fix it in every copy.
+
+`CourseOffering` separates "what the course is" from "one scheduled run of it".
+This gives a clean **one-to-many** relationship: one `Course` can be reused by
+many `CourseOffering`s (my OFF001 and OFF003 both point at the *same*
+`javaCourse` object). Through **composition**, each offering *has a* `Course`
+and *has an* `Instructor` — it references the real objects rather than copying
+their text, so the course is defined once and shared. This maps directly to how
+the data will later be modelled in MongoDB: a courses collection and an
+offerings collection that reference it.
+
