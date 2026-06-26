@@ -225,3 +225,30 @@ that pass it**, dropping the rest. It's the stream equivalent of the
 the condition `true` continue down the stream, and the ones that make it
 `false` are removed.
 
+---
+
+## Day 3 Exercise 06 - Build StudentService Using the Same Pattern
+
+### How is `StudentService` similar to `CourseService`?
+
+They follow the **exact same structure**, just for a different model:
+
+- Both depend on a **repository interface** (`StudentRepository` /
+  `CourseRepository`) injected through the constructor — neither service stores
+  data itself; storage is delegated.
+- Both hold the **business rules**: validate input, reject duplicates on
+  register/create, and look items up by ID.
+- Both **throw a custom exception** when an item is missing
+  (`StudentNotFoundException` / `CourseNotFoundException`) instead of printing,
+  leaving the caller to decide how to display it.
+- Both expose the same shape of methods: register/create, get-by-id,
+  get-all, and a search-by-loop. Recognising this repeated pattern is the whole
+  point — once you know one, you can build the other.
+
+### Which file stores students temporarily while the program is running?
+
+**`InMemoryStudentRepository.java`** — it holds the students in a
+`LinkedHashMap` in memory. That map only lives while the program is running, so
+the data disappears on exit (later replaced by MongoDB). Note it's *not* the
+service or the interface that stores anything — only this implementation class.
+
