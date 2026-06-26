@@ -110,3 +110,24 @@ Participants may use AI tools to:
 
 Participants must always review, verify, test, and understand any AI-generated output. No passwords, API keys, tokens, private keys, or confidential data should be placed into AI prompts.
 
+---
+
+## Day 3 Exercise 01 - Build and Trace the Code Flow
+
+### When `getCourseById("C004")` is called, which file does the request go to first, second, and third?
+
+1. **`CourseService.java`** — `getCourseById()` runs first. It's the entry
+   point the demo class calls; it holds the business logic and decides what to
+   do (here, ask the repository and throw `CourseNotFoundException` if missing).
+2. **`InMemoryCourseRepository.java`** (called through the
+   **`CourseRepository.java`** interface) — the service calls
+   `courseRepository.findById("C004")`. The service depends on the *interface*,
+   and the in-memory class is the actual implementation that runs.
+3. **The `LinkedHashMap`** inside `InMemoryCourseRepository` — the repository
+   looks the course up in its in-memory map and returns it (wrapped in an
+   `Optional`). The `Course` then travels back up: map → repository → service →
+   demo class, where it's printed.
+
+So the direction is **demo → service → repository → map**, and the found
+object returns back up the same path.
+
