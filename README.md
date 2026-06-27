@@ -147,3 +147,25 @@ The main difference is typing: a Java `ArrayList<Instructor>` can only hold
 hold anything — numbers, strings, objects, all mixed — because JS is
 dynamically typed.
 
+---
+
+## Day 4 Exercise 03 - Functions and Arrow Functions for Student Data
+
+### Why are arrow functions important before learning React?
+
+React code is **full of arrow functions**, so being comfortable with them now
+makes React much easier later:
+
+- **Event handlers and callbacks** are almost always written as arrows, e.g.
+  `onClick={() => handleClick(student)}`.
+- **Array methods** that React uses to build UI — especially `.map()` to turn a
+  list of data into a list of components — take an arrow:
+  `students.map((s) => <li>{s.studentName}</li>)`.
+- The **short arrow form** (`(x) => x.status`, implicit return, no braces) is
+  used constantly because it's compact and reads cleanly inside JSX.
+- Arrow functions also **don't rebind `this`**, which avoids a common class of
+  bugs React developers used to hit with normal functions.
+
+So practising normal → arrow → short arrow on plain student data first means
+the syntax is already familiar when it shows up everywhere in React.
+
