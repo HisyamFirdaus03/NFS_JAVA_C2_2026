@@ -249,3 +249,43 @@ So `filter` is the "search engine" part — it decides *which* records match —
 and the DOM code just displays whatever `filter` returns. An empty result is a
 normal case (`length === 0`), which is why we show "No students found".
 
+---
+
+## Day 4 Exercise 07 - Load Students from a JSON File Using Fetch
+
+### 1. What does `async` mean?
+
+It marks a function as one that **may contain slow tasks and is allowed to
+wait** without freezing the rest of the page. An `async` function also lets you
+use `await` inside it, and it always returns a promise.
+
+### 2. What does `await` do?
+
+It **pauses the function until a slow task finishes**, then gives you its
+result, before moving to the next line. Example: `await fetch(...)` waits for
+the response to come back. Without `await`, the code would race ahead and try
+to use data that hasn't arrived yet.
+
+### 3. What does `fetch` do?
+
+It **requests data from a file or a URL** and returns a response. Here it asks
+for the local `students.json`; later it will ask a backend API for the same
+kind of data.
+
+### 4. Why do we use `fetch` before connecting to a real backend API?
+
+Because the **code is almost identical**. Loading from a local file
+(`fetch("students.json")`) uses the same `fetch` + `await` + `response.json()`
++ `try/catch` steps as calling a real API
+(`fetch("http://localhost:8080/api/students")`). Practising on a JSON file lets
+us learn the async data-loading pattern now, so swapping in the Spring Boot API
+later is a tiny change — just the URL.
+
+### 5. Why should this exercise be run using Live Server?
+
+Because `fetch` needs a real web server (`http://`). If you double-click the
+HTML, it opens as a `file://` page, and browsers **block `fetch` from reading
+local files** for security — so `students.json` won't load. Live Server serves
+the folder over `http://`, which lets `fetch` work like it would against a real
+backend.
+
