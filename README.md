@@ -110,3 +110,22 @@ Participants may use AI tools to:
 
 Participants must always review, verify, test, and understand any AI-generated output. No passwords, API keys, tokens, private keys, or confidential data should be placed into AI prompts.
 
+---
+
+## Day 4 Exercise 01 - Create a JavaScript Student Object
+
+### What is one difference between a Java object and a JavaScript object?
+
+A Java object must be built from a **class** (a fixed blueprint): the type,
+fields, and their types are declared ahead of time and checked by the compiler,
+so an object always has exactly the fields the class defines. A JavaScript
+object can be created **directly** with an object literal `{}` — no class
+needed — and it's **dynamically typed**: you can add, remove, or change
+properties at runtime, and a property can hold any type. So Java is rigid and
+checked before it runs; JavaScript is flexible and only finds mistakes while
+running.
+
+(Other valid differences: Java enforces `private` fields and getters/setters;
+JS properties are open by default. Java needs compilation; JS runs directly
+with `node`.)
+
