@@ -169,3 +169,39 @@ makes React much easier later:
 So practising normal → arrow → short arrow on plain student data first means
 the syntax is already familiar when it shows up everywhere in React.
 
+---
+
+## Day 4 Exercise 04 - JavaScript Array Methods
+
+### 1. What is the difference between `filter`, `find`, and `map`?
+
+- **`filter`** keeps every item that passes a condition and returns a **new
+  array** (zero or more items).
+- **`find`** returns the **first single item** that passes a condition (one
+  object), or `undefined` if none match — not an array.
+- **`map`** **transforms** every item and returns a **new array of the same
+  length** (e.g. turn an array of student objects into an array of emails).
+
+In short: `filter` = "give me the matching ones", `find` = "give me the first
+matching one", `map` = "give me a changed version of each one".
+
+### 2. Which four array methods change the original array?
+
+`push`, `pop`, `shift`, and `unshift`. (`forEach`, `filter`, `find`, and `map`
+do **not** change the original.)
+
+### 3. What does `push` return?
+
+The **new length** of the array after adding the item to the end.
+
+### 4. What does `pop` return?
+
+The **item that was removed** from the end of the array.
+
+### 5. What is the difference between `shift` and `unshift`?
+
+They both work on the **front** of the array but in opposite directions:
+- **`shift`** *removes* the first item and returns that removed item.
+- **`unshift`** *adds* one or more items to the beginning and returns the new
+  length.
+
