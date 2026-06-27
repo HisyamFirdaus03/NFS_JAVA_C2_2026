@@ -129,3 +129,21 @@ running.
 JS properties are open by default. Java needs compilation; JS runs directly
 with `node`.)
 
+---
+
+## Day 4 Exercise 02 - Store Instructors in an Array and Loop Through Them
+
+### How is a JavaScript array similar to Java `ArrayList`?
+
+Both are **resizable, ordered lists** — they grow and shrink as you add or
+remove items, unlike a fixed-size Java array (`Instructor[]`). You access items
+by index (`instructors[0]`), keep insertion order, and ask for the count
+(`.length` in JS ≈ `.size()` in `ArrayList`). You can also loop over both the
+same way: JS `for...of` is the direct equivalent of Java's enhanced
+`for (Instructor i : instructors)`.
+
+The main difference is typing: a Java `ArrayList<Instructor>` can only hold
+`Instructor` objects (checked by the compiler), while a JavaScript array can
+hold anything — numbers, strings, objects, all mixed — because JS is
+dynamically typed.
+
