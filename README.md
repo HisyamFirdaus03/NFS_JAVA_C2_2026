@@ -205,3 +205,25 @@ They both work on the **front** of the array but in opposite directions:
 - **`unshift`** *adds* one or more items to the beginning and returns the new
   length.
 
+---
+
+## Day 4 Exercise 05 - Render Student Cards in HTML
+
+### What does the DOM allow JavaScript to do?
+
+The DOM (Document Object Model) is the browser's live, tree-shaped
+representation of the HTML page. It lets JavaScript **read and change the page
+while it's running**, instead of the HTML being fixed text. Through the DOM,
+JavaScript can:
+
+- **Find** elements (`document.getElementById("student-list")`),
+- **Create** new elements (`document.createElement("div")`),
+- **Fill** them with content (`innerHTML`),
+- **Add or remove** them from the page (`appendChild`),
+- and **respond to events** like clicks.
+
+So instead of writing four student cards by hand in HTML, I keep the data in a
+JavaScript array and let the code **generate** the page from it. This is the
+same core idea React is built on — data drives the UI — just done manually here
+with raw DOM methods.
+
