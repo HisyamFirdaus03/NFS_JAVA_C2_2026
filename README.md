@@ -227,3 +227,25 @@ JavaScript array and let the code **generate** the page from it. This is the
 same core idea React is built on — data drives the UI — just done manually here
 with raw DOM methods.
 
+---
+
+## Day 4 Exercise 06 - Add Search to the Student List
+
+### How is JavaScript `filter` used in a search feature?
+
+`filter` builds a **new array containing only the items that match what the
+user typed**, and that smaller array is what gets rendered. The flow is:
+
+1. Read the search box value and lowercase it (so the search ignores case).
+2. Run `students.filter(...)` with a condition that checks each student's name
+   against the keyword, e.g.
+   `student.studentName.toLowerCase().includes(keyword)`.
+3. `filter` keeps only the students whose name contains the keyword and returns
+   them as a new array — the **original `students` array is untouched**, which
+   is why Reset can instantly show everyone again.
+4. Pass that filtered array to `renderStudents()` to redraw the cards.
+
+So `filter` is the "search engine" part — it decides *which* records match —
+and the DOM code just displays whatever `filter` returns. An empty result is a
+normal case (`length === 0`), which is why we show "No students found".
+
