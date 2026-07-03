@@ -1,0 +1,62 @@
+### 1. Get all bookings (empty [] before any are created) -> 200
+GET http://localhost:8081/api/bookings
+
+
+### 2. Create a valid booking -> 201 (and EV001 seats drop by 2)
+POST http://localhost:8081/api/bookings
+Content-Type: application/json
+
+{
+  "eventId": "EV001",
+  "participantName": "Rahim Gonzalez",
+  "participantEmail": "rahim@example.com",
+  "seats": 2
+}
+
+
+### 3. Get one booking -> 200
+GET http://localhost:8081/api/bookings/BK001
+
+
+### 4. Create a booking with missing fields -> 400
+POST http://localhost:8081/api/bookings
+Content-Type: application/json
+
+{
+  "eventId": "",
+  "participantName": "",
+  "participantEmail": "",
+  "seats": 0
+}
+
+
+### 5. Create a booking with an invalid event ID -> 404
+POST http://localhost:8081/api/bookings
+Content-Type: application/json
+
+{
+  "eventId": "EV999",
+  "participantName": "Rahim Gonzalez",
+  "participantEmail": "rahim@example.com",
+  "seats": 2
+}
+
+
+### 6. Create a booking with too many seats -> 400
+POST http://localhost:8081/api/bookings
+Content-Type: application/json
+
+{
+  "eventId": "EV002",
+  "participantName": "Rahim Gonzalez",
+  "participantEmail": "rahim@example.com",
+  "seats": 100
+}
+
+
+### 7. Check seats reduced after booking -> EV001 availableSeats now 118
+GET http://localhost:8081/api/events
+
+
+### 8. Optional: cancel a booking -> 200, status CANCELLED, seats returned
+DELETE http://localhost:8081/api/bookings/BK001
