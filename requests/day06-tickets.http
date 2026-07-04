@@ -1,0 +1,49 @@
+### Day 6 - Support Desk API test file
+### Run the app first:  mvn spring-boot:run   (base URL http://localhost:8080)
+### Click "Send Request" above each request (VS Code REST Client).
+
+
+### 1. Health endpoint  -> 200
+GET http://localhost:8080/api/health
+
+
+### 2. About endpoint  -> 200
+GET http://localhost:8080/api/about
+
+
+### 3. Get all tickets  -> 200 (JSON array)
+GET http://localhost:8080/api/tickets
+
+
+### 4. Get one existing ticket  -> 200 (single object)
+GET http://localhost:8080/api/tickets/T001
+
+
+### 5. Get one missing ticket  -> 404
+GET http://localhost:8080/api/tickets/T999
+
+
+### 6. Create a valid ticket  -> 201
+POST http://localhost:8080/api/tickets
+Content-Type: application/json
+
+{
+  "title": "Printer not responding",
+  "description": "Office printer on level 3 is not printing.",
+  "category": "Hardware",
+  "priority": "LOW",
+  "createdBy": "aisyah@example.com"
+}
+
+
+### 7. Create an invalid ticket - blank required fields  -> 400
+POST http://localhost:8080/api/tickets
+Content-Type: application/json
+
+{
+  "title": "",
+  "description": "",
+  "category": "",
+  "priority": "",
+  "createdBy": ""
+}
