@@ -18,8 +18,18 @@ public class HealthController {
     public Map<String, String> health() {
         // Returning a small JSON object. Spring MVC converts Map -> JSON automatically.
         return Map.of(
-                "status", "UP",
-                "service", "asset-tracker-api"
+            "status", "UP",
+            "service", "support-desk-api"
+        );
+    }
+
+
+    @GetMapping("/api/about")
+    public Map<String, String> about() {
+        return Map.of(
+            "appName", "Support Desk API",
+            "version", "1.0.0",
+            "description", "API for managing IT support tickets"
         );
     }
 }
