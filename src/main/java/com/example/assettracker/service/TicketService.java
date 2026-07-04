@@ -1,8 +1,10 @@
 package com.example.assettracker.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.assettracker.dto.CreateTicketRequest;
 import com.example.assettracker.dto.TicketResponse;
 import com.example.assettracker.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -56,5 +58,26 @@ public class TicketService {
                 .filter(ticket -> ticket.getId().equalsIgnoreCase(id))
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket " + id + " was not found"));
+    }
+
+    // Create a new ticket: the backend sets id, status and createdAt.
+    public TicketResponse createTicket(CreateTicketRequest request) {
+        TicketResponse created = new TicketResponse(
+                createNextId(),
+                request.getTitle(),
+                request.getDescription(),
+                request.getCategory(),
+                request.getPriority(),
+                "OPEN",
+                request.getCreatedBy(),
+                LocalDate.now().toString()
+        );
+
+        tickets.add(created);
+        return created;
+    }
+
+    private String createNextId() {
+        return "T" + String.format("%03d", tickets.size() + 1);
     }
 }

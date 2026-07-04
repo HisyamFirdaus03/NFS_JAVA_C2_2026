@@ -1,10 +1,16 @@
 package com.example.assettracker.controller;
 
+import com.example.assettracker.dto.CreateTicketRequest;
 import com.example.assettracker.dto.TicketResponse;
 import com.example.assettracker.service.TicketService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -31,5 +37,14 @@ public class TicketController {
         // The {id} from the URL is passed straight to the service, which does
         // the lookup and throws ResourceNotFoundException (-> 404) if missing.
         return ticketService.getTicketById(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED) // 201 on success
+    public TicketResponse createTicket(@Valid @RequestBody CreateTicketRequest request) {
+        // @Valid triggers the @NotBlank checks. If any fail, Spring throws
+        // MethodArgumentNotValidException, which the GlobalExceptionHandler
+        // turns into a 400 - so we never reach the service with bad data.
+        return ticketService.createTicket(request);
     }
 }
