@@ -1,5 +1,6 @@
 package com.example.assettracker.service;
 
+import com.example.assettracker.dto.CreateTicketRequest;
 import com.example.assettracker.dto.TicketResponse;
 import com.example.assettracker.exception.ResourceNotFoundException;
 import com.example.assettracker.model.Ticket;
@@ -7,6 +8,7 @@ import com.example.assettracker.repository.TicketRepository;
 
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 
 /*
@@ -39,6 +41,23 @@ public class TicketService {
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket " + id + " was not found"));
 
         return toResponse(ticket);
+    }
+
+    // Create a new ticket from the request DTO. The backend sets status and
+    // createdAt; the client never provides those. Saved into MongoDB.
+    public TicketResponse createTicket(CreateTicketRequest request) {
+        Ticket ticket = new Ticket(
+                request.getTitle().trim(),
+                request.getDescription().trim(),
+                request.getCategory().trim(),
+                request.getPriority().trim(),
+                "OPEN",
+                request.getCreatedBy().trim(),
+                Instant.now()
+        );
+
+        Ticket savedTicket = ticketRepository.save(ticket);
+        return toResponse(savedTicket);
     }
 
     // Helper: convert a Ticket document into a TicketResponse DTO.
