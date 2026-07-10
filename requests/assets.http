@@ -39,3 +39,21 @@ Content-Type: application/json
   "serialNumber": "",
   "location": ""
 }
+
+
+############################################################
+# Tickets (Day 7 Exercise 3 - read from MongoDB)
+# NOTE: this app runs on port 8081 (Docker uses 8080 locally).
+############################################################
+
+### Get all tickets from MongoDB
+GET http://localhost:8081/api/tickets
+
+
+### Get one existing ticket by id
+# Replace the ID below with an actual _id returned by GET /api/tickets
+GET http://localhost:8081/api/tickets/REPLACE_WITH_REAL_ID
+
+
+### Get a missing ticket -> 404
+GET http://localhost:8081/api/tickets/000000000000000000000000
